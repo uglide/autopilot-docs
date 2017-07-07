@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>What is Autopilot, and what can it do? &#8212; Autopilot 1.5 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/centertext.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Autopilot Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Autopilot Documentation Front Page" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tutorial.html" title="Autopilot Tutorial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Autopilot Documentation Front Page"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="what-is-autopilot-and-what-can-it-do">
+<h1>What is Autopilot, and what can it do?<a class="headerlink" href="#what-is-autopilot-and-what-can-it-do" title="Permalink to this headline">¶</a></h1>
+<p>Autopilot is a tool for writing functional tests. Functional tests are tests that:</p>
+<ul class="simple">
+<li>Run out-of-process. I.e.- the tests run in a separate process to the application under test.</li>
+<li>Simulate user interaction. Autopilot provides methods to generate keyboard, mouse, and touch events. These events are delivered to the application under test in exactly the same way as normal input events. The application under test therefore cannot distinguish between a “real” user and an autopilot test case.</li>
+<li>Validate design decisions. The primary function of a functional test is to determine whether of not an application has met the design criteria. Functional tests evaluate high-level design correctness.</li>
+</ul>
+</div>
+<div class="section" id="where-is-autopilot-used">
+<h1>Where is Autopilot used?<a class="headerlink" href="#where-is-autopilot-used" title="Permalink to this headline">¶</a></h1>
+<p>Autopilot was designed to test the <a class="reference external" href="http://unity.ubuntu.com/">Unity 3D</a> shell. However, since then it has been used to test a number of other applications, including:</p>
+<ul class="simple">
+<li>Core Ubuntu GUI applications.</li>
+<li>Mobile phone applications for the Ubuntu Phone &amp; Ubuntu Tablet.</li>
+</ul>
+</div>
+<div class="section" id="how-does-autopilot-fit-with-other-test-frameworks">
+<h1>How does Autopilot fit with other test frameworks?<a class="headerlink" href="#how-does-autopilot-fit-with-other-test-frameworks" title="Permalink to this headline">¶</a></h1>
+<img alt="../_images/test_pyramid.svg" src="../_images/test_pyramid.svg" /><p>Autopilot exists at the apex of the “testing pyramid”. It is designed to test high-level functionality, and complement a solid base of unit and integration tests. <em>Using autopilot is not a substitute for testing your application with unit and integration tests!</em>. Autopilot is a very capable tool for testing high-level feature functionality. It is not an appropriate tool for testing low-level implementation details.</p>
+<p>Autopilot is built on top of several other python test frameworks, including:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pypi.python.org/pypi/testtools">Python Testtools</a> - <code class="xref py py-class docutils literal"><span class="pre">AutopilotTestCase</span></code> derives from the testtools <code class="xref py py-class docutils literal"><span class="pre">TestCase</span></code> class, which allows test author to use all the extended features found in testtools. Specifically, Autopilot includes the <code class="xref py py-class docutils literal"><span class="pre">Eventually</span></code> matcher class, which allows test authors to make assertions about the application under test without having to worry about the timing between the tests and the application under test.</li>
+<li><a class="reference external" href="https://launchpad.net/testscenarios">Python Test Scenarios</a> - <code class="xref py py-class docutils literal"><span class="pre">AutopilotTestCase</span></code> contains the necessary plumbing in order to allow test authors to use test scenarios out of the box. This is extremely useful when you want to test several different modes of operation.</li>
+<li><a class="reference external" href="https://pypi.python.org/pypi/fixtures/0.3.14">Python Test Fixtures</a> - Several parts of autopilot are built as fixtures. While this is rarely exposed to the test author, it can be useful to know that this functionality is always present whenever autopilot is installed.</li>
+</ul>
+</div>
+<div class="section" id="what-do-autopilot-tests-contain">
+<h1>What do Autopilot Tests Contain?<a class="headerlink" href="#what-do-autopilot-tests-contain" title="Permalink to this headline">¶</a></h1>
+<p>A typical autopilot test has three distinct stages:</p>
+<img alt="../_images/test_stages.svg" src="../_images/test_stages.svg" /><p><strong>The Setup Stage</strong></p>
+<p>There are several concerns that must be addressed in the setup Phase. The most important step is to launch the application to be tested. Most autopilot test suites launch the application under test anew for each test. This ensures that the test starts with the application under test in a known, clean state. Autopilot can launch normal applications, launch applications via upstart, or launch apps contained within a click package.</p>
+<p>Tests may also wish to take other actions in the setup stage, including:</p>
+<ul class="simple">
+<li>Setting environment variables to certain values.</li>
+<li>Starting external applications that are required for the test to run.</li>
+<li>Creating files or folders (or any kind of external data) on disk.</li>
+</ul>
+<p>The purpose of the setup stage is to make sure that everything that is required for the test to run is in place.</p>
+<p><strong>The Interaction Stage</strong></p>
+<p>Once the setup has been completed, it’s time to start interacting with your application. This typically involves generating input events. For example, if you are testing a text editor you might have a test whose specification is similar to the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Type</span> <span class="n">some</span> <span class="n">text</span> <span class="n">into</span> <span class="n">the</span> <span class="n">document</span> <span class="n">area</span><span class="p">,</span> <span class="nb">open</span> <span class="n">the</span> <span class="s1">&#39;Edit&#39;</span> <span class="n">menu</span> <span class="ow">and</span> <span class="n">click</span>
+<span class="n">the</span> <span class="s1">&#39;Search and Replace&#39;</span> <span class="n">menu</span> <span class="n">item</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>During this stage you will most likely need to read the applications internal state. For example, your test will need to know where the ‘Edit’ menu is on the screen. Thankfully, autopilot takes care of the details, allowing you to write expressive tests.</p>
+<p><strong>The Assertion Stage</strong></p>
+<p>The final stage is where you determine if your test should pass or fail. Most tests will contain more than one assertion (<a class="reference internal" href="../faq/faq.html#faq-many-asserts"><span class="std std-ref">why?</span></a>). Autopilot contains several custom assertions that make testing high-level concepts easier.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/otto-64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">What is Autopilot, and what can it do?</a></li>
+<li><a class="reference internal" href="#where-is-autopilot-used">Where is Autopilot used?</a></li>
+<li><a class="reference internal" href="#how-does-autopilot-fit-with-other-test-frameworks">How does Autopilot fit with other test frameworks?</a></li>
+<li><a class="reference internal" href="#what-do-autopilot-tests-contain">What do Autopilot Tests Contain?</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Autopilot Documentation Front Page</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="next chapter">Autopilot Tutorial</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tutorial.html" title="Autopilot Tutorial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Autopilot Documentation Front Page"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      <div class=center_text>
+        <a href="../faq/contribute.html">Learn how you can contribute!</a> / <a href="https://bugs.launchpad.net/autopilot/+filebug">File a bug</a>
+     <br/>
+      </div>
+        &copy; Copyright 2012-2014, Canonical.
+    </div>
+
+
+  </body>
+</html>

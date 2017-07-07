@@ -1,0 +1,278 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Autopilot Man Page &#8212; Autopilot 1.5 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/centertext.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="XPathSelect Query Protocol" href="appendix/protocol.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="appendix/protocol.html" title="XPathSelect Query Protocol"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="autopilot-man-page">
+<h1>Autopilot Man Page<a class="headerlink" href="#autopilot-man-page" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>SYNOPSIS<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="description">
+<h2>DESCRIPTION<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>autopilot is a tool for writing functional test suites for graphical applications for Ubuntu.</p>
+</div>
+<div class="section" id="options">
+<h2>OPTIONS<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>General Options</dt>
+<dd><blockquote class="first">
+<div><table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>Get help from autopilot. This command can also be present after  a
+sub-command (such as run or list) to get help on the specific com‐
+mand.  Further options are restricted to particular autopilot com‐
+mands.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-v</span>, <span class="option">--version</span></kbd></td>
+<td>Display autopilot version and exit.</td></tr>
+</tbody>
+</table>
+<p class="attribution">&mdash;enable-profile
+Enable collection of profile data for autopilot itself. If enabled,
+profile data will be stored in ‘autopilot_&lt;pid&gt;.profile’ in the
+current working directory.</p>
+</div></blockquote>
+<dl class="last docutils">
+<dt>list [options] suite [suite…]</dt>
+<dd><p class="first">List the autopilot tests found in the given test suite.</p>
+<dl class="docutils">
+<dt>suite</dt>
+<dd>See <a class="reference internal" href="#specifying-suites">SPECIFYING SUITES</a></dd>
+</dl>
+<table class="last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-r<var>o</var></span>, <span class="option">--run-order</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>List tests in the order they will be run in, rather than alphabet‐
+ically (which is the default).</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--suites</span></kbd></td>
+<td>Lists only available suites, not tests contained within the suite.</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>run [options] suite [suite…]</dt>
+<dd><p class="first">Run one or more test suites.</p>
+<dl class="docutils">
+<dt>suite</dt>
+<dd>See <a class="reference internal" href="#specifying-suites">SPECIFYING SUITES</a></dd>
+</dl>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-o <var>FILE</var></span>, <span class="option">--output <var>FILE</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Specify where the test log should be written. Defaults to  stdout.
+If  a directory is specified the file will be created with a file‐
+name of &lt;hostname&gt;_&lt;dd.mm.yyy_HHMMSS&gt;.log</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-f <var>FORMAT</var></span>, <span class="option">--format <var>FORMAT</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Specify the format for the log. Valid options are ‘xml’ and ‘text’
+‘subunit’ for JUnit XML, plain text, and subunit, respectively.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-f<var>f</var></span>, <span class="option">--failfast</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Stop the test run on the first error or failure.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-r</span>, <span class="option">--record</span></kbd></td>
+<td>Record failed tests. Using this option requires the ‘recordmydesk‐
+top’ application be installed. By default, videos  are  stored  in
+/tmp/autopilot</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--record-options</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Comma separated list of options to pass to recordmydesktop</td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>-rd DIR, –record-directory DIR</dt>
+<dd>Directory where videos should be stored (overrides the default set
+by the -r option).</dd>
+</dl>
+<table class="last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-r<var>o</var></span>, <span class="option">--random-order</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Run the tests in random order</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></td>
+<td>Causes autopilot to print the test log to stdout while the test is
+running.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--debug-profile</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Select a profile for what additional debugging information should
+be attached to failed test results.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--timeout-profile</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Alter the timeout values Autopilot uses. Selecting ‘long’ will
+make autopilot use longer timeouts for various polling loops. This
+can be useful if autopilot is running on very slow hardware</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>launch [options] application</dt>
+<dd><p class="first">Launch an application with introspection enabled.</p>
+<table class="last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></td>
+<td>Show autopilot log messages. Set twice to also log data useful
+for debugging autopilot itself.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">-i <var>INTERFACE</var></span>, <span class="option">--interface <var>INTERFACE</var></span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Specify which introspection interace to load.  The default
+(‘Auto’) uses ldd to try and detect which interface to load.
+Options are Gtk and Qt.</td></tr>
+</tbody>
+</table>
+</dd>
+<dt>vis [options]</dt>
+<dd><p class="first">Open the autopilot visualizer tool.</p>
+<table class="last docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></td>
+<td>Show autopilot log messages. Set twice to also log data useful
+for debugging autopilot itself.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-t<var>estability</var></span></kbd></td>
+<td>Start the vis tool in testability mode. Used for self-tests only.</td></tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="specifying-suites">
+<h2>SPECIFYING SUITES<a class="headerlink" href="#specifying-suites" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Suites are listed as a python dotted package name. Autopilot will do a
+recursive import in order to find all tests within a python package.</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/otto-64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Autopilot Man Page</a><ul>
+<li><a class="reference internal" href="#synopsis">SYNOPSIS</a></li>
+<li><a class="reference internal" href="#description">DESCRIPTION</a></li>
+<li><a class="reference internal" href="#options">OPTIONS</a></li>
+<li><a class="reference internal" href="#specifying-suites">SPECIFYING SUITES</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="appendix/protocol.html"
+                        title="previous chapter">XPathSelect Query Protocol</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="appendix/protocol.html" title="XPathSelect Query Protocol"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      <div class=center_text>
+        <a href="faq/contribute.html">Learn how you can contribute!</a> / <a href="https://bugs.launchpad.net/autopilot/+filebug">File a bug</a>
+     <br/>
+      </div>
+        &copy; Copyright 2012-2014, Canonical.
+    </div>
+
+
+  </body>
+</html>

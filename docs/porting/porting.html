@@ -1,0 +1,320 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Porting Autopilot Tests &#8212; Autopilot 1.5 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/centertext.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Appendices" href="../appendix/appendix.html" />
+    <link rel="prev" title="Frequently Asked Questions" href="../faq/faq.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../appendix/appendix.html" title="Appendices"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../faq/faq.html" title="Frequently Asked Questions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="porting-autopilot-tests">
+<span id="porting"></span><h1><a class="toc-backref" href="#id1">Porting Autopilot Tests</a><a class="headerlink" href="#porting-autopilot-tests" title="Permalink to this headline">¶</a></h1>
+<p>This document contains hints as to what is required to port a test suite from any version of autopilot to any newer version.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#porting-autopilot-tests" id="id1">Porting Autopilot Tests</a><ul>
+<li><a class="reference internal" href="#a-note-on-versions" id="id2">A note on Versions</a></li>
+<li><a class="reference internal" href="#porting-to-autopilot-v1-4-x" id="id3">Porting to Autopilot v1.4.x</a><ul>
+<li><a class="reference internal" href="#gtk-tests-and-boolean-parameters" id="id4">Gtk Tests and Boolean Parameters</a></li>
+<li><a class="reference internal" href="#select-single-changes" id="id5"><code class="xref py py-meth docutils literal"><span class="pre">select_single</span></code> Changes</a></li>
+<li><a class="reference internal" href="#dbus-backends-and-dbusintrospectionobject-changes" id="id6">DBus backends and <code class="xref py py-class docutils literal"><span class="pre">DBusIntrospectionObject</span></code> changes</a></li>
+<li><a class="reference internal" href="#python-3" id="id7">Python 3</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#porting-to-autopilot-v1-3-x" id="id8">Porting to Autopilot v1.3.x</a><ul>
+<li><a class="reference internal" href="#qtintrospectiontestmixin-and-gtkintrospectiontestmixin-no-longer-exist" id="id9"><code class="docutils literal"><span class="pre">QtIntrospectionTestMixin</span></code> and <code class="docutils literal"><span class="pre">GtkIntrospectionTestMixin</span></code> no longer exist</a></li>
+<li><a class="reference internal" href="#autopilot-emulators-namespace-has-been-deprecated" id="id10"><code class="docutils literal"><span class="pre">autopilot.emulators</span></code> namespace has been deprecated</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="a-note-on-versions">
+<h2><a class="toc-backref" href="#id2">A note on Versions</a><a class="headerlink" href="#a-note-on-versions" title="Permalink to this headline">¶</a></h2>
+<p>Autopilot releases are reasonably tightly coupled with Ubuntu releases. However, the autopilot authors maintain separate version numbers, with the aim of separating the autopilot release cadence from the Ubuntu platform release cadence.</p>
+<p>Autopilot versions earlier than 1.2 were not publicly announced, and were only used within Canonical. For that reason, this document assumes that version 1.2 is the lowest version of autopilot present <cite>“in the wild”</cite>.</p>
+</div>
+<div class="section" id="porting-to-autopilot-v1-4-x">
+<h2><a class="toc-backref" href="#id3">Porting to Autopilot v1.4.x</a><a class="headerlink" href="#porting-to-autopilot-v1-4-x" title="Permalink to this headline">¶</a></h2>
+<p>The 1.4 release contains several changes that required a break in the DBus wire protocol between autopilot and the applications under test. Most of these changes require no change to test code.</p>
+<div class="section" id="gtk-tests-and-boolean-parameters">
+<h3><a class="toc-backref" href="#id4">Gtk Tests and Boolean Parameters</a><a class="headerlink" href="#gtk-tests-and-boolean-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Version 1.3 of the autopilot-gtk backend contained <a class="reference external" href="https://bugs.launchpad.net/autopilot-gtk/+bug/1214249">a bug</a> that caused all Boolean properties to be exported as integers instead of boolean values. This in turn meant that test code would fail to return the correct objects when using selection criteria such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">visible_buttons</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">select_many</span><span class="p">(</span><span class="s2">&quot;GtkPushButton&quot;</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and instead had to write something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">visible_buttons</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">select_many</span><span class="p">(</span><span class="s2">&quot;GtkPushButton&quot;</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This bug has now been fixed, and using the integer selection will fail.</p>
+</div>
+<div class="section" id="select-single-changes">
+<h3><a class="toc-backref" href="#id5"><code class="xref py py-meth docutils literal"><span class="pre">select_single</span></code> Changes</a><a class="headerlink" href="#select-single-changes" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-meth docutils literal"><span class="pre">select_single</span></code> method used to return <code class="docutils literal"><span class="pre">None</span></code> in the case where no object was found that matched the search criteria. This led to rather awkward code in places where the object you are searching for is being created dynamically:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">my_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">select_single</span><span class="p">(</span><span class="s2">&quot;MyObject&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">my_obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Object &#39;MyObject&#39; was not found within 10 seconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This makes the authors intent harder to discern. To improve this situation, two changes have been made:</p>
+<ol class="arabic">
+<li><p class="first"><code class="xref py py-meth docutils literal"><span class="pre">select_single</span></code> raises a <code class="xref py py-class docutils literal"><span class="pre">StateNotFoundError</span></code> exception if the search terms returned no values, rather than returning <code class="docutils literal"><span class="pre">None</span></code>.</p>
+</li>
+<li><p class="first">If the object being searched for is likely to not exist, there is a new method: <code class="xref py py-meth docutils literal"><span class="pre">wait_select_single</span></code> will try to retrieve an object for 10 seconds. If the object does not exist after that timeout, a <code class="xref py py-class docutils literal"><span class="pre">StateNotFoundError</span></code> exception is raised. This means that the above code example should now be written as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">my_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">wait_select_single</span><span class="p">(</span><span class="s2">&quot;MyObject&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="dbus-backends-and-dbusintrospectionobject-changes">
+<span id="dbus-backends"></span><h3><a class="toc-backref" href="#id6">DBus backends and <code class="xref py py-class docutils literal"><span class="pre">DBusIntrospectionObject</span></code> changes</a><a class="headerlink" href="#dbus-backends-and-dbusintrospectionobject-changes" title="Permalink to this headline">¶</a></h3>
+<p>Due to a change in how
+<code class="xref py py-class docutils literal"><span class="pre">DBusIntrospectionObject</span></code> objects store
+their DBus backend a couple of classmethods have now become instance methods.</p>
+<p>These affected methods are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="xref py py-meth docutils literal"><span class="pre">get_all_instances</span></code></li>
+<li><code class="xref py py-meth docutils literal"><span class="pre">get_root_instance</span></code></li>
+<li><code class="xref py py-meth docutils literal"><span class="pre">get_state_by_path</span></code></li>
+</ul>
+</div></blockquote>
+<p>For example, if your old code is something along the lines of:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">all_keys</span> <span class="o">=</span> <span class="n">KeyCustomProxy</span><span class="o">.</span><span class="n">get_all_instances</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will instead need to have something like this instead:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">all_keys</span> <span class="o">=</span> <span class="n">app_proxy</span><span class="o">.</span><span class="n">select_many</span><span class="p">(</span><span class="n">KeyCustomProxy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-3">
+<span id="python3-support"></span><h3><a class="toc-backref" href="#id7">Python 3</a><a class="headerlink" href="#python-3" title="Permalink to this headline">¶</a></h3>
+<p>Starting from version 1.4, autopilot supports python 3 as well as python 2. Test authors can choose to target either version of python.</p>
+</div>
+</div>
+<div class="section" id="porting-to-autopilot-v1-3-x">
+<h2><a class="toc-backref" href="#id8">Porting to Autopilot v1.3.x</a><a class="headerlink" href="#porting-to-autopilot-v1-3-x" title="Permalink to this headline">¶</a></h2>
+<p>The 1.3 release included many API breaking changes. Earlier versions of autopilot made several assumptions about where tests would be run, that turned out not to be correct. Autopilot 1.3 brought several much-needed features, including:</p>
+<ul class="simple">
+<li>A system for building pluggable implementations for several core components. This system is used in several areas:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>The input stack can now generate events using either the X11 client libraries, or the UInput kernel driver. This is necessary for devices that do not use X11.</li>
+<li>The display stack can now report display information for systems that use both X11 and the mir display server.</li>
+<li>The process stack can now report details regarding running processes &amp; their windows on both Desktop, tablet, and phone platforms.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>A large code cleanup and reorganisation. In particular, lots of code that came from the Unity 3D codebase has been removed if it was deemed to not be useful to the majority of test authors. This code cleanup includes a flattening of the autopilot namespace. Previously, many useful classes lived under the <code class="docutils literal"><span class="pre">autopilot.emulators</span></code> namespace. These have now been moved into the <code class="docutils literal"><span class="pre">autopilot</span></code> namespace.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is an API breakage in autopilot 1.3. The changes outlined under
+the heading “<a class="reference internal" href="#dbus-backends"><span class="std std-ref">DBus backends and DBusIntrospectionObject changes</span></a>” apply to version
+1.3.1+13.10.20131003.1-0ubuntu1 and onwards .</p>
+</div>
+<div class="section" id="qtintrospectiontestmixin-and-gtkintrospectiontestmixin-no-longer-exist">
+<h3><a class="toc-backref" href="#id9"><code class="docutils literal"><span class="pre">QtIntrospectionTestMixin</span></code> and <code class="docutils literal"><span class="pre">GtkIntrospectionTestMixin</span></code> no longer exist</a><a class="headerlink" href="#qtintrospectiontestmixin-and-gtkintrospectiontestmixin-no-longer-exist" title="Permalink to this headline">¶</a></h3>
+<p>In autopilot 1.2, tests enabled application introspection services by inheriting from one of two mixin classes: <code class="docutils literal"><span class="pre">QtIntrospectionTestMixin</span></code> to enable testing Qt4, Qt5, and Qml applications, and <code class="docutils literal"><span class="pre">GtkIntrospectionTestMixin</span></code> to enable testing Gtk 2 and Gtk3 applications. For example, a test case class in autopilot 1.2 might look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autopilot.introspection.qt</span> <span class="k">import</span> <span class="n">QtIntrospectionTestMixin</span>
+<span class="kn">from</span> <span class="nn">autopilot.testcase</span> <span class="k">import</span> <span class="n">AutopilotTestCase</span>
+
+
+<span class="k">class</span> <span class="nc">MyAppTestCase</span><span class="p">(</span><span class="n">AutopilotTestCase</span><span class="p">,</span> <span class="n">QtIntrospectionTestMixin</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyAppTestCase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_test_application</span><span class="p">(</span><span class="s2">&quot;../../my-app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In Autopilot 1.3, the <code class="xref py py-class docutils literal"><span class="pre">AutopilotTestCase</span></code> class contains this functionality directly, so the <code class="docutils literal"><span class="pre">QtIntrospectionTestMixin</span></code> and <code class="docutils literal"><span class="pre">GtkIntrospectionTestMixin</span></code> classes no longer exist. The above example becomes simpler:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autopilot.testcase</span> <span class="k">import</span> <span class="n">AutopilotTestCase</span>
+
+
+<span class="k">class</span> <span class="nc">MyAppTestCase</span><span class="p">(</span><span class="n">AutopilotTestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyAppTestCase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_test_application</span><span class="p">(</span><span class="s2">&quot;../../my-app&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Autopilot will try and determine the introspection type automatically. If this process fails, you can specify the application type manually:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autopilot.testcase</span> <span class="k">import</span> <span class="n">AutopilotTestCase</span>
+
+
+<span class="k">class</span> <span class="nc">MyAppTestCase</span><span class="p">(</span><span class="n">AutopilotTestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyAppTestCase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_test_application</span><span class="p">(</span><span class="s2">&quot;../../my-app&quot;</span><span class="p">,</span> <span class="n">app_type</span><span class="o">=</span><span class="s1">&#39;qt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt>Method <code class="xref py py-meth docutils literal"><span class="pre">autopilot.testcase.AutopilotTestCase.launch_test_application</span></code></dt>
+<dd>Launch test applications.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="autopilot-emulators-namespace-has-been-deprecated">
+<h3><a class="toc-backref" href="#id10"><code class="docutils literal"><span class="pre">autopilot.emulators</span></code> namespace has been deprecated</a><a class="headerlink" href="#autopilot-emulators-namespace-has-been-deprecated" title="Permalink to this headline">¶</a></h3>
+<p>In autopilot 1.2 and earlier, the <code class="docutils literal"><span class="pre">autopilot.emulators</span></code> package held several modules and classes that were used frequently in tests. This package has been removed, and it’s contents merged into the autopilot package. Below is a table showing the basic translations that need to be made:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Old module</th>
+<th class="head">New Module</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">autopilot.emulators.input</span></code></td>
+<td><code class="xref py py-mod docutils literal"><span class="pre">autopilot.input</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">autopilot.emulators.X11</span></code></td>
+<td>Deprecated - use
+<code class="xref py py-mod docutils literal"><span class="pre">autopilot.input</span></code> for input
+and <code class="xref py py-mod docutils literal"><span class="pre">autopilot.display</span></code> for
+getting display information.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">autopilot.emulators.bamf</span></code></td>
+<td>Deprecated - use
+<code class="xref py py-mod docutils literal"><span class="pre">autopilot.process</span></code> instead.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/otto-64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Porting Autopilot Tests</a><ul>
+<li><a class="reference internal" href="#a-note-on-versions">A note on Versions</a></li>
+<li><a class="reference internal" href="#porting-to-autopilot-v1-4-x">Porting to Autopilot v1.4.x</a><ul>
+<li><a class="reference internal" href="#gtk-tests-and-boolean-parameters">Gtk Tests and Boolean Parameters</a></li>
+<li><a class="reference internal" href="#select-single-changes"><code class="docutils literal"><span class="pre">select_single</span></code> Changes</a></li>
+<li><a class="reference internal" href="#dbus-backends-and-dbusintrospectionobject-changes">DBus backends and <code class="docutils literal"><span class="pre">DBusIntrospectionObject</span></code> changes</a></li>
+<li><a class="reference internal" href="#python-3">Python 3</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#porting-to-autopilot-v1-3-x">Porting to Autopilot v1.3.x</a><ul>
+<li><a class="reference internal" href="#qtintrospectiontestmixin-and-gtkintrospectiontestmixin-no-longer-exist"><code class="docutils literal"><span class="pre">QtIntrospectionTestMixin</span></code> and <code class="docutils literal"><span class="pre">GtkIntrospectionTestMixin</span></code> no longer exist</a></li>
+<li><a class="reference internal" href="#autopilot-emulators-namespace-has-been-deprecated"><code class="docutils literal"><span class="pre">autopilot.emulators</span></code> namespace has been deprecated</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../faq/faq.html"
+                        title="previous chapter">Frequently Asked Questions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../appendix/appendix.html"
+                        title="next chapter">Appendices</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../appendix/appendix.html" title="Appendices"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../faq/faq.html" title="Frequently Asked Questions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      <div class=center_text>
+        <a href="../faq/contribute.html">Learn how you can contribute!</a> / <a href="https://bugs.launchpad.net/autopilot/+filebug">File a bug</a>
+     <br/>
+      </div>
+        &copy; Copyright 2012-2014, Canonical.
+    </div>
+
+
+  </body>
+</html>

@@ -20,7 +20,11 @@
 
 from docutils import nodes
 from sphinx.util.compat import Directive
-from sphinx.util.compat import make_admonition
+
+try:
+    from sphinx.util.compat import make_admonition
+except ImportError:
+    from docutils.parsers.rst.directives.admonitions import BaseAdmonition as make_admonition
 
 
 def setup(app):
@@ -52,13 +56,13 @@ class OttoSaysDirective(Directive):
     has_content = True
 
     def run(self):
-        ad = make_admonition(otto, self.name, ['Autopilot Says'], self.options,
+        ad = make_admonition(self.name, ['Autopilot Says'], self.options,
                              self.content, self.lineno, self.content_offset,
                              self.block_text, self.state, self.state_machine)
-        image_container = nodes.container()
-        image_container.append(nodes.image(uri='/images/otto-64.png'))
-        image_container['classes'] = ['otto-image-container']
-        outer_container = nodes.container()
-        outer_container.extend([image_container] + ad)
-        outer_container['classes'] = ['otto-says-container']
-        return [outer_container]
+        #image_container = nodes.container()
+        #image_container.append(nodes.image(uri='/images/otto-64.png'))
+        #image_container['classes'] = ['otto-image-container']
+        #outer_container = nodes.container()
+        #outer_container.extend([image_container, ad])
+        #outer_container['classes'] = ['otto-says-container']
+        return [ad]

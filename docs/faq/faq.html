@@ -1,0 +1,420 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Frequently Asked Questions &#8212; Autopilot 1.5 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/centertext.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Porting Autopilot Tests" href="../porting/porting.html" />
+    <link rel="prev" title="autopilot.testcase - Base class for all Autopilot Test Cases" href="../api/autopilot.testcase.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../porting/porting.html" title="Porting Autopilot Tests"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../api/autopilot.testcase.html" title="autopilot.testcase - Base class for all Autopilot Test Cases"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1><a class="toc-backref" href="#id2">Frequently Asked Questions</a><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#frequently-asked-questions" id="id2">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#autopilot-the-project" id="id3">Autopilot: The Project</a><ul>
+<li><a class="reference internal" href="#q-where-can-i-get-help-support" id="id4">Q. Where can I get help / support?</a></li>
+<li><a class="reference internal" href="#q-which-version-of-autopilot-should-i-install" id="id5">Q. Which version of autopilot should I install?</a></li>
+<li><a class="reference internal" href="#q-should-i-write-my-tests-in-python2-or-python3" id="id6">Q. Should I write my tests in python2 or python3?</a></li>
+<li><a class="reference internal" href="#q-should-i-convert-my-existing-tests-to-python3" id="id7">Q: Should I convert my existing tests to python3?</a></li>
+<li><a class="reference internal" href="#q-where-can-i-report-a-bug" id="id8">Q. Where can I report a bug?</a></li>
+<li><a class="reference internal" href="#q-what-type-of-applications-can-autopilot-test" id="id9">Q. What type of applications can autopilot test?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autopilot-tests" id="id10">Autopilot Tests</a><ul>
+<li><a class="reference internal" href="#q-autopilot-tests-often-include-multiple-assertions-isn-t-this-bad-practise" id="id11">Q. Autopilot tests often include multiple assertions. Isn’t this bad practise?</a></li>
+<li><a class="reference internal" href="#q-how-do-i-write-a-test-that-uses-either-a-mouse-or-a-touch-device-interchangeably" id="id12">Q. How do I write a test that uses either a Mouse or a Touch device interchangeably?</a></li>
+<li><a class="reference internal" href="#q-how-do-i-use-the-onscreen-keyboard-osk-to-input-text-in-my-test" id="id13">Q. How do I use the Onscreen Keyboard (OSK) to input text in my test?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autopilot-tests-and-launching-applications" id="id14">Autopilot Tests and Launching Applications</a><ul>
+<li><a class="reference internal" href="#q-how-do-i-launch-a-click-application-from-within-a-test-so-i-can-introspect-it" id="id15">Q. How do I launch a Click application from within a test so I can introspect it?</a></li>
+<li><a class="reference internal" href="#q-how-do-i-access-an-already-running-application-so-that-i-can-test-introspect-it" id="id16">Q. How do I access an already running application so that I can test/introspect it?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autopilot-qt-gtk-support" id="id17">Autopilot Qt &amp; Gtk Support</a><ul>
+<li><a class="reference internal" href="#q-how-do-i-launch-my-application-so-that-i-can-explore-it-with-the-vis-tool" id="id18">Q. How do I launch my application so that I can explore it with the vis tool?</a></li>
+<li><a class="reference internal" href="#q-what-is-the-impact-on-memory-of-adding-objectnames-to-qml-items" id="id19">Q. What is the impact on memory of adding objectNames to QML items?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="autopilot-the-project">
+<h2><a class="toc-backref" href="#id3">Autopilot: The Project</a><a class="headerlink" href="#autopilot-the-project" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-where-can-i-get-help-support">
+<span id="help-and-support"></span><h3><a class="toc-backref" href="#id4">Q. Where can I get help / support?</a><a class="headerlink" href="#q-where-can-i-get-help-support" title="Permalink to this headline">¶</a></h3>
+<p>The developers hang out in the #ubuntu-autopilot IRC channel on irc.freenode.net.</p>
+</div>
+<div class="section" id="q-which-version-of-autopilot-should-i-install">
+<h3><a class="toc-backref" href="#id5">Q. Which version of autopilot should I install?</a><a class="headerlink" href="#q-which-version-of-autopilot-should-i-install" title="Permalink to this headline">¶</a></h3>
+<p>Ideally you should adopt and utilize the latest version of autopilot. If your testcase requires you to utilize an
+older version of autopilot for reasons other than <a class="reference internal" href="../porting/porting.html#porting"><span class="std std-ref">Porting Autopilot Tests</span></a>, please <a class="reference external" href="https://bugs.launchpad.net/autopilot/+filebug">file a bug</a> and let the development team know about your issue.</p>
+</div>
+<div class="section" id="q-should-i-write-my-tests-in-python2-or-python3">
+<h3><a class="toc-backref" href="#id6">Q. Should I write my tests in python2 or python3?</a><a class="headerlink" href="#q-should-i-write-my-tests-in-python2-or-python3" title="Permalink to this headline">¶</a></h3>
+<p>As Autopilot fully supports python3 (see <a class="reference internal" href="../porting/porting.html#python3-support"><span class="std std-ref">Python 3</span></a>), you should seek to use python3 for new tests. Before making a decision, you should also ensure any 3rd party modules your test may depend on also support python3.</p>
+</div>
+<div class="section" id="q-should-i-convert-my-existing-tests-to-python3">
+<h3><a class="toc-backref" href="#id7">Q: Should I convert my existing tests to python3?</a><a class="headerlink" href="#q-should-i-convert-my-existing-tests-to-python3" title="Permalink to this headline">¶</a></h3>
+<p>See above. In a word, yes. Converting python2 to python3 (see <a class="reference internal" href="../porting/porting.html#python3-support"><span class="std std-ref">Python 3</span></a>) is generally straightforward and converting a testcase is likely much easier than a full python application. You can also consider retaining python2 compatibility upon conversion.</p>
+</div>
+<div class="section" id="q-where-can-i-report-a-bug">
+<h3><a class="toc-backref" href="#id8">Q. Where can I report a bug?</a><a class="headerlink" href="#q-where-can-i-report-a-bug" title="Permalink to this headline">¶</a></h3>
+<p>Autopilot is hosted on launchpad - bugs can be reported on the <a class="reference external" href="https://bugs.launchpad.net/autopilot/+filebug">launchpad bug page for autopilot</a> (this requires a launchpad account).</p>
+</div>
+<div class="section" id="q-what-type-of-applications-can-autopilot-test">
+<h3><a class="toc-backref" href="#id9">Q. What type of applications can autopilot test?</a><a class="headerlink" href="#q-what-type-of-applications-can-autopilot-test" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Autopilot works with severall different types of applications, including:</dt>
+<dd><ul class="first last simple">
+<li>The Unity desktop shell.</li>
+<li>Gtk 2 &amp; 3 applications.</li>
+<li>Qt4, Qt5, and Qml applications.</li>
+</ul>
+</dd>
+</dl>
+<p>Autopilot is designed to work across all the form factors Ubuntu runs on, including the phone and tablet.</p>
+</div>
+</div>
+<div class="section" id="autopilot-tests">
+<h2><a class="toc-backref" href="#id10">Autopilot Tests</a><a class="headerlink" href="#autopilot-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-autopilot-tests-often-include-multiple-assertions-isn-t-this-bad-practise">
+<span id="faq-many-asserts"></span><h3><a class="toc-backref" href="#id11">Q. Autopilot tests often include multiple assertions. Isn’t this bad practise?</a><a class="headerlink" href="#q-autopilot-tests-often-include-multiple-assertions-isn-t-this-bad-practise" title="Permalink to this headline">¶</a></h3>
+<p>Maybe. But probably not.</p>
+<p>Unit tests should test a single unit of code, and ideally be written such that they can fail in exactly a single way. Therefore, unit tests should have a single assertion that determines whether the test passes or fails.</p>
+<p>However, autopilot tests are not unit tests, they are functional tests. Functional test suites tests features, not units of code, so there’s several very good reasons to have more than assertion in a single test:</p>
+<ul>
+<li><p class="first">Some features require several assertions to prove that the feature is working correctly. For example, you may wish to verify that the ‘Save’ dialog box opens correctly, using the following code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="n">save_win</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="s2">&quot;Save Document&quot;</span><span class="p">)))</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="n">save_win</span><span class="o">.</span><span class="n">visible</span><span class="p">,</span> <span class="n">Equals</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="n">save_win</span><span class="o">.</span><span class="n">has_focus</span><span class="p">,</span> <span class="n">Equals</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Some tests need to wait for the application to respond to user input before the test continues. The easiest way to do this is to use the <code class="xref py py-class docutils literal"><span class="pre">Eventually</span></code> matcher in the middle of your interaction with the application. For example, if testing the <a class="reference external" href="http://www.mozilla.org/en-US/">Firefox</a> browsers ability to print a certain web comic, we might produce a test that looks similar to this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_firefox_can_print_xkcd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Firefox must be able to print xkcd.com.&quot;&quot;&quot;</span>
+    <span class="c1"># Put keyboard focus in URL bar:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s1">&#39;Ctrl+l&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="s1">&#39;http://xkcd.com&#39;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s1">&#39;Enter&#39;</span><span class="p">)</span>
+    <span class="c1"># wait for page to load:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">loading</span><span class="p">,</span> <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="kc">False</span><span class="p">)))</span>
+    <span class="c1"># open print dialog:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s1">&#39;Ctrl+p&#39;</span><span class="p">)</span>
+    <span class="c1"># wait for dialog to open:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">print_dialog</span><span class="o">.</span><span class="n">open</span><span class="p">,</span> <span class="n">Eventually</span><span class="p">(</span><span class="n">Equals</span><span class="p">(</span><span class="kc">True</span><span class="p">)))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">keyboard</span><span class="o">.</span><span class="n">press_and_release</span><span class="p">(</span><span class="s1">&#39;Enter&#39;</span><span class="p">)</span>
+    <span class="c1"># ensure something was sent to our faked printer:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fake_printer</span><span class="o">.</span><span class="n">documents_printed</span><span class="p">,</span> <span class="n">Equals</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>In general, autopilot tests are more relaxed about the ‘one assertion per test’ rule. However, care should still be taken to produce tests that are as small and understandable as possible.</p>
+</div>
+<div class="section" id="q-how-do-i-write-a-test-that-uses-either-a-mouse-or-a-touch-device-interchangeably">
+<h3><a class="toc-backref" href="#id12">Q. How do I write a test that uses either a Mouse or a Touch device interchangeably?</a><a class="headerlink" href="#q-how-do-i-write-a-test-that-uses-either-a-mouse-or-a-touch-device-interchangeably" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">autopilot.input.Pointer</span></code> class is a simple wrapper that unifies some of the differences between the <code class="xref py py-class docutils literal"><span class="pre">Touch</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Mouse</span></code> classes. To use it, pass in the device you want to use under the hood, like so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pointer1</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Touch</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+<span class="n">pointer2</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">())</span>
+<span class="c1"># pointer1 and pointer2 now have identical APIs</span>
+</pre></div>
+</div>
+<p>Combined with test scenarios, this can be used to write tests that are run twice - once with a mouse device and once with a touch device:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autopilot.input</span> <span class="k">import</span> <span class="n">Mouse</span><span class="p">,</span> <span class="n">Touch</span><span class="p">,</span> <span class="n">Pointer</span>
+<span class="kn">from</span> <span class="nn">autopilot.testcase</span> <span class="k">import</span> <span class="n">AutopilotTestCase</span>
+
+<span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">AutopilotTestCase</span><span class="p">):</span>
+
+    <span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;with mouse&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">pointer</span><span class="o">=</span><span class="n">Pointer</span><span class="p">(</span><span class="n">Mouse</span><span class="o">.</span><span class="n">create</span><span class="p">()))),</span>
+        <span class="p">(</span><span class="s1">&#39;with touch&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">pointer</span><span class="o">=</span><span class="n">Pointer</span><span class="p">(</span><span class="n">Touch</span><span class="o">.</span><span class="n">create</span><span class="p">()))),</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Click the pointer at 100,100.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If you only want to use the mouse on certain platforms, use the <code class="xref py py-mod docutils literal"><span class="pre">autopilot.platform</span></code> module to determine the current platform at runtime.</p>
+</div>
+<div class="section" id="q-how-do-i-use-the-onscreen-keyboard-osk-to-input-text-in-my-test">
+<h3><a class="toc-backref" href="#id13">Q. How do I use the Onscreen Keyboard (OSK) to input text in my test?</a><a class="headerlink" href="#q-how-do-i-use-the-onscreen-keyboard-osk-to-input-text-in-my-test" title="Permalink to this headline">¶</a></h3>
+<p>The OSK is an backend option for the <code class="xref py py-meth docutils literal"><span class="pre">autopilot.input.Keyboard.create</span></code>
+method (see this <a class="reference internal" href="../tutorial/advanced_autopilot.html#adv-picking-backend"><span class="std std-ref">Advanced Autopilot</span></a> section for
+details regarding backend selection.)</p>
+<p>Unlike the other backends (X11, UInput) the OSK has a GUI presence and thus can
+be displayed on the screen.</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">autopilot.input.Keyboard</span></code> class provides a context manager that
+handles any cleanup required when dealing with the input backends.</p>
+<p>For example in the instance when the backend is the OSK, when leaving the scope
+of the context manager the OSK will be dismissed with a swipe:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">autopilot.input</span> <span class="k">import</span> <span class="n">Keyboard</span>
+
+<span class="n">text_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_launch_test_input_area</span><span class="p">()</span>
+<span class="n">keyboard</span> <span class="o">=</span> <span class="n">Keyboard</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;OSK&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">focused_type</span><span class="p">(</span><span class="n">text_area</span><span class="p">)</span> <span class="k">as</span> <span class="n">kb</span><span class="p">:</span>
+    <span class="n">kb</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="s2">&quot;Hello World.&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">(</span><span class="n">text_area</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">Equals</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">))</span>
+<span class="c1"># At this point now the OSK has been swiped away.</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">assertThat</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="autopilot-tests-and-launching-applications">
+<h2><a class="toc-backref" href="#id14">Autopilot Tests and Launching Applications</a><a class="headerlink" href="#autopilot-tests-and-launching-applications" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-how-do-i-launch-a-click-application-from-within-a-test-so-i-can-introspect-it">
+<h3><a class="toc-backref" href="#id15">Q. How do I launch a Click application from within a test so I can introspect it?</a><a class="headerlink" href="#q-how-do-i-launch-a-click-application-from-within-a-test-so-i-can-introspect-it" title="Permalink to this headline">¶</a></h3>
+<p>Launching a Click application is similar to launching a traditional application
+and is as easy as using
+<code class="xref py py-meth docutils literal"><span class="pre">launch_click_package</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">app_proxy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_click_package</span><span class="p">(</span>
+    <span class="s2">&quot;com.ubuntu.dropping-letters&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="q-how-do-i-access-an-already-running-application-so-that-i-can-test-introspect-it">
+<h3><a class="toc-backref" href="#id16">Q. How do I access an already running application so that I can test/introspect it?</a><a class="headerlink" href="#q-how-do-i-access-an-already-running-application-so-that-i-can-test-introspect-it" title="Permalink to this headline">¶</a></h3>
+<p>In instances where it’s impossible to launch the application-under-test from
+within the testsuite use
+<code class="xref py py-meth docutils literal"><span class="pre">get_proxy_object_for_existing_process</span></code> to get a
+proxy object for the running application.
+In all other cases the recommended way to launch and retrieve a proxy object
+for an application is by calling either
+<code class="xref py py-meth docutils literal"><span class="pre">launch_test_application</span></code> or
+<code class="xref py py-meth docutils literal"><span class="pre">launch_click_package</span></code></p>
+<p>For example, to access a long running process that is running before your test starts:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">application_pid</span> <span class="o">=</span> <span class="n">get_long_running_processes_pid</span><span class="p">()</span>
+<span class="n">app_proxy</span> <span class="o">=</span> <span class="n">get_proxy_object_for_existing_process</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="n">application_pid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="autopilot-qt-gtk-support">
+<h2><a class="toc-backref" href="#id17">Autopilot Qt &amp; Gtk Support</a><a class="headerlink" href="#autopilot-qt-gtk-support" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="q-how-do-i-launch-my-application-so-that-i-can-explore-it-with-the-vis-tool">
+<h3><a class="toc-backref" href="#id18">Q. How do I launch my application so that I can explore it with the vis tool?</a><a class="headerlink" href="#q-how-do-i-launch-my-application-so-that-i-can-explore-it-with-the-vis-tool" title="Permalink to this headline">¶</a></h3>
+<p>Autopilot can launch applications with Autopilot support enabled allowing you to
+explore and introspect the application using the <a class="reference internal" href="../guides/running_ap.html#visualise-introspection-tree"><span class="std std-ref">vis
+tool</span></a></p>
+<p>For instance launching gedit is as easy as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ autopilot3 launch gedit
+</pre></div>
+</div>
+<p><em>Autopilot launch</em> attempts to detect if you are launching either a Gtk or Qt
+application so that it can enable the correct libraries. If is is unable to
+determine this you will need to specify the type of application it is by using
+the <strong>-i</strong> argument.</p>
+<p>For example, in our previous example Autopilot was able to automatically
+determine that gedit is a Gtk application and thus no further arguments were
+required.</p>
+<p>If we want to use the vis tool to introspect something like the <a class="reference internal" href="../tutorial/getting_started.html#tut-test-with-interaction"><span class="std std-ref">testapp.py
+script</span></a> from an earlier tutorial we will need to
+inform autopilot that it is a Qt application so that it can enable the correct
+support:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ autopilot3 launch -i Qt testapp.py
+</pre></div>
+</div>
+<p>Now that it has been launched with Autopilot support we can introspect and
+explore out application using the <a class="reference internal" href="../guides/running_ap.html#visualise-introspection-tree"><span class="std std-ref">vis tool</span></a>.</p>
+</div>
+<div class="section" id="q-what-is-the-impact-on-memory-of-adding-objectnames-to-qml-items">
+<h3><a class="toc-backref" href="#id19">Q. What is the impact on memory of adding objectNames to QML items?</a><a class="headerlink" href="#q-what-is-the-impact-on-memory-of-adding-objectnames-to-qml-items" title="Permalink to this headline">¶</a></h3>
+<p>The objectName is a QString property of QObject which defaults to an empty QString.
+QString is UTF-16 representation and because it uses some general purpose
+optimisations it usually allocates twice the space it needs to be able to grow
+fast. It also uses implicit sharing with copy-on-write and other similar
+tricks to increase performance again. These properties makes the used memory
+not straightforward to predict. For example, copying an object with an
+objectName, shares the memory between both as long as they are not changed.</p>
+<p>When measuring memory consumption, things like memory alignment come into play.
+Due to the fact that QML is interpreted by a JavaScript engine, we are working
+in levels where lots of abstraction layers are in between the code and the
+hardware and we have no chance to exactly measure consumption of a single
+objectName property. Therefore the taken approach is to measure lots of items
+and calculate the average consumption.</p>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">Measurement of memory consumption of 10000 Items</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="30%" />
+<col width="37%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Without objectName</th>
+<th class="head">With unique objectName</th>
+<th class="head">With same objectName</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>65292 kB</td>
+<td>66628 kB</td>
+<td>66480 kB</td>
+</tr>
+</tbody>
+</table>
+<p>=&gt; With 10000 different objectNames 1336 kB of memory are consumed which is
+around 127 Bytes per Item.</p>
+<p>Indeed, this is more than only the string. Some of the memory is certainly lost
+due to memory alignment where certain areas are just not perfectly filled in
+but left empty. However, certainly not all of the overhead can be blamed on
+that. Additional memory is used by the QObject meta object information that is
+needed to do signal/slot connections. Also, QML does some optimisations: It
+does not connect signals/slots when not needed. So the fact that the object
+name is set could trigger some more connections.</p>
+<p>Even if more than the actual string size is used and QString uses a large
+representation, this is very little compared to the rest. A qmlscene with just
+the item is 27MB. One full screen image in the Nexus 10 tablet can easily
+consume around 30MB of memory. So objectNames are definitely not the first
+places where to search for optimisations.</p>
+<p>Writing the test code snippets, one interesting thing came up frequently: Just
+modifying the code around to set the objectName often influences the results
+more than the actual string. For example, having a javascript function that
+assigns the objectName definitely uses much more memory than the objectName
+itself. Unless it makes sense from a performance point of view (frequently
+changing bindings can be slow), objectNames should be added by directly
+binding the value to the property instead using helper code to assign it.</p>
+<p>Conclusion: If an objectName is needed for testing, this is definitely worth
+it. objectName’s should obviously not be added when not needed. When adding
+them, the <a class="reference external" href="http://qt-project.org/doc/qt-5.0/qtquick/qtquick-performance.html">general QML guidelines for performance should be followed.</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/otto-64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#autopilot-the-project">Autopilot: The Project</a><ul>
+<li><a class="reference internal" href="#q-where-can-i-get-help-support">Q. Where can I get help / support?</a></li>
+<li><a class="reference internal" href="#q-which-version-of-autopilot-should-i-install">Q. Which version of autopilot should I install?</a></li>
+<li><a class="reference internal" href="#q-should-i-write-my-tests-in-python2-or-python3">Q. Should I write my tests in python2 or python3?</a></li>
+<li><a class="reference internal" href="#q-should-i-convert-my-existing-tests-to-python3">Q: Should I convert my existing tests to python3?</a></li>
+<li><a class="reference internal" href="#q-where-can-i-report-a-bug">Q. Where can I report a bug?</a></li>
+<li><a class="reference internal" href="#q-what-type-of-applications-can-autopilot-test">Q. What type of applications can autopilot test?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autopilot-tests">Autopilot Tests</a><ul>
+<li><a class="reference internal" href="#q-autopilot-tests-often-include-multiple-assertions-isn-t-this-bad-practise">Q. Autopilot tests often include multiple assertions. Isn’t this bad practise?</a></li>
+<li><a class="reference internal" href="#q-how-do-i-write-a-test-that-uses-either-a-mouse-or-a-touch-device-interchangeably">Q. How do I write a test that uses either a Mouse or a Touch device interchangeably?</a></li>
+<li><a class="reference internal" href="#q-how-do-i-use-the-onscreen-keyboard-osk-to-input-text-in-my-test">Q. How do I use the Onscreen Keyboard (OSK) to input text in my test?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autopilot-tests-and-launching-applications">Autopilot Tests and Launching Applications</a><ul>
+<li><a class="reference internal" href="#q-how-do-i-launch-a-click-application-from-within-a-test-so-i-can-introspect-it">Q. How do I launch a Click application from within a test so I can introspect it?</a></li>
+<li><a class="reference internal" href="#q-how-do-i-access-an-already-running-application-so-that-i-can-test-introspect-it">Q. How do I access an already running application so that I can test/introspect it?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autopilot-qt-gtk-support">Autopilot Qt &amp; Gtk Support</a><ul>
+<li><a class="reference internal" href="#q-how-do-i-launch-my-application-so-that-i-can-explore-it-with-the-vis-tool">Q. How do I launch my application so that I can explore it with the vis tool?</a></li>
+<li><a class="reference internal" href="#q-what-is-the-impact-on-memory-of-adding-objectnames-to-qml-items">Q. What is the impact on memory of adding objectNames to QML items?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../api/autopilot.testcase.html"
+                        title="previous chapter"><code class="docutils literal"><span class="pre">autopilot.testcase</span></code> - Base class for all Autopilot Test Cases</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../porting/porting.html"
+                        title="next chapter">Porting Autopilot Tests</a></p>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../porting/porting.html" title="Porting Autopilot Tests"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../api/autopilot.testcase.html" title="autopilot.testcase - Base class for all Autopilot Test Cases"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Autopilot 1.5 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      <div class=center_text>
+        <a href="contribute.html">Learn how you can contribute!</a> / <a href="https://bugs.launchpad.net/autopilot/+filebug">File a bug</a>
+     <br/>
+      </div>
+        &copy; Copyright 2012-2014, Canonical.
+    </div>
+
+
+  </body>
+</html>
